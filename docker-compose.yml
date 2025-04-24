@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+
+  app:
+    image: codomatech/nginx-php8
+    ports:
+      - '${APP_PORT:-8080}:80'
+    depends_on:
+      - solr
+    volumes:
+      - .:/usr/share/nginx/html
+    networks:
+      - app-network
+
+  redis:
+    image: redis:latest
+    container_name: local-redis
+    ports:
+      - "6379:6379" # Expose Redis on localhost:6379
+    restart: always
+    networks:
+      - app-network
+
+  solr:
+    image: solr:latest
+    container_name: local-solr
+    ports:
+      - "8983:8983"
+    networks:
+      - app-network
+    volumes:
+      - solr-data:/var/solr
+      - ./solr:/var/solr/ern3
+    environment:
+      - SOLR_HOME=/var/solr # Set default Solr home directory
+      - SOLR_LOGS_DIR=/var/solr/logs # Log directory for Solr
+      - SOLR_PRECREATE="ern3 /opt/solr/server/solr/configsets/ern3_configs"
+    restart: always
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  solr-data:
+    driver: local

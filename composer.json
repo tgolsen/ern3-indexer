@@ -1,0 +1,20 @@
+{
+    "name": "tgolsen/ern3-indexer",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Tgolsen\\Ern3Indexer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ted Olsen",
+            "email": "tgolsen@gmail.com"
+        }
+    ],
+    "require": {
+        "aws/aws-sdk-php": "^3.342",
+        "predis/predis": "^2.3",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

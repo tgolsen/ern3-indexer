@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+  <luceneMatchVersion>9.8.0</luceneMatchVersion>
+
+  <!-- Request Handlers -->
+  <requestHandler name="/select" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+      <int name="rows">10</int>
+    </lst>
+  </requestHandler>
+
+  <requestHandler name="/update" class="solr.UpdateRequestHandler" />
+
+  <!-- Disable the Managed Schema and use the Classic Schema -->
+  <schemaFactory class="ClassicIndexSchemaFactory"/>
+
+  <!-- Enable auto-commit for dynamic schema -->
+  <autoCommit>
+    <maxTime>15000</maxTime> <!-- Auto-commit after 15 seconds -->
+  </autoCommit>
+
+  <!-- Caching options for better query performance -->
+  <query>
+    <filterCache class="solr.FastLRUCache" size="512" initialSize="512" />
+    <queryResultCache class="solr.LRUCache" size="512" initialSize="512" />
+    <documentCache class="solr.LRUCache" size="512" initialSize="512" />
+  </query>
+
+  <!-- Directories -->
+  <dataDir>${solr.implicitCoreNodeName:}/data</dataDir>
+
+  <!-- Logging -->
+  <logging>
+    <str name="logLevel">INFO</str>
+  </logging>
+</config>

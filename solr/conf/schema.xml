@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="application-schema" version="1.6">
+
+  <!-- Unique identifier for the documents -->
+  <uniqueKey>id</uniqueKey>
+
+  <!-- Field definitions -->
+  <fields>
+    <!-- Core fields -->
+    <field name="id" type="string" indexed="true" stored="true" required="true" /> <!-- Unique document ID -->
+    <field name="src_id" type="string" indexed="true" stored="true" required="true" />
+    <field name="timestamp" type="tdate" indexed="true" stored="true" /> <!-- Solr-compatible date field -->
+
+    <!-- Metadata fields -->
+    <field name="title" type="text_general" indexed="true" stored="true" /> <!-- Main title field -->
+    <field name="artist_name" type="text_general" indexed="true" stored="true" /> <!-- Artist name -->
+    <field name="isrc" type="string" indexed="true" stored="true" /> <!-- ISRC identifier -->
+    <field name="genre" type="string" indexed="true" stored="true" /> <!-- Genre -->
+    <field name="sub_genre" type="string" indexed="true" stored="true" /> <!-- Sub-genre -->
+
+    <!-- File and track details -->
+    <field name="label_name" type="text_general" indexed="true" stored="true" /> <!-- Label/Publisher name -->
+    <field name="duration" type="string" indexed="true" stored="true" /> <!-- Track duration -->
+    <field name="image_url" type="string" indexed="true" stored="true" /> <!-- Image URL field -->
+
+    <!-- Additional optional fields -->
+    <field name="keywords" type="text_general" indexed="true" stored="true" multiValued="true" /> <!-- Keywords -->
+    <field name="batch_id" type="string" indexed="true" stored="true" /> <!-- Batch ID -->
+    <field name="item_directory" type="string" indexed="true" stored="true" /> <!-- s3 directory -->
+    <field name="directory" type="string" indexed="true" stored="true" /> <!-- Directory information -->
+  </fields>
+
+  <!-- Dynamic fields (for additional unmapped fields) -->
+  <dynamicField name="*_s" type="string" indexed="true" stored="true" />
+  <dynamicField name="*_t" type="text_general" indexed="true" stored="true" />
+  <dynamicField name="*_b" type="boolean" indexed="true" stored="true" />
+  <dynamicField name="*_dt" type="tdate" indexed="true" stored="true" />
+  <dynamicField name="*_i" type="int" indexed="true" stored="true" />
+  <dynamicField name="*_l" type="long" indexed="true" stored="true" />
+  <dynamicField name="*_d" type="double" indexed="true" stored="true" />
+
+  <!-- Field Type Definitions -->
+  <types>
+    <!-- String field: Used for fields requiring exact matches -->
+    <fieldType name="string" class="solr.StrField" docValues="true" />
+
+    <!-- Text field: Supports full-text search -->
+    <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory" />
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+
+    <!-- Boolean field -->
+    <fieldType name="boolean" class="solr.BoolField" />
+
+    <!-- Date field -->
+    <fieldType name="tdate" class="solr.TrieDateField" precisionStep="0" positionIncrementGap="0" docValues="true" />
+
+    <!-- Numeric fields -->
+    <fieldType name="int" class="solr.TrieIntField" precisionStep="0" docValues="true" />
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" docValues="true" />
+    <fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" docValues="true" />
+  </types>
+</schema>

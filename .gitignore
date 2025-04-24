@@ -1,0 +1,41 @@
+# Ignore system and IDE files
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# Ignore environment files
+.env
+.env.local
+.env.*
+
+# Ignore dependency folders and files
+/vendor/
+composer.lock
+
+# Ignore log files
+*.log
+logs/
+*.log.*
+
+# Ignore Docker/Redis files
+docker-compose.override.yml
+*.data
+*.pid
+
+# Ignore cache and temporary files
+/cache/
+*.tmp
+
+# Ignore processed files (if generated)
+processed_files.log
+error_files.log
+
+# Ignore other unwanted files
+*.bak
+*.backup
+*.orig
+
+# Scratch/storage/data
+data/
+solr/data
