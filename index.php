@@ -127,7 +127,7 @@ $pagination = render_pagination($current_page, $total_pages, $_GET);
           integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico?_=9.8.1">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico?_=9.8.1">
-    <title>ERN3 Source Image Search</title>
+    <title>DDEX Source Image Search</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -186,7 +186,7 @@ $pagination = render_pagination($current_page, $total_pages, $_GET);
     </style>
 </head>
 <body>
-<h1>ERN3 Source Image Search</h1>
+<h1>DDEX Source Image Search</h1>
 
 <!-- Query Builder Form -->
 <form method="GET" id="search-form">
