@@ -21,6 +21,8 @@ services:
     restart: always
     networks:
       - app-network
+    volumes:
+      - ./redis-data:/data
 
   solr:
     image: solr:latest
